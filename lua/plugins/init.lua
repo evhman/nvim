@@ -70,5 +70,12 @@ return {
     config = function ()
       require "configs.indent"
     end
+  },
+
+  {
+    'RaafatTurki/hex.nvim',
+    config = function ()
+      require('hex').setup()
+    end
   }
 }
