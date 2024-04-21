@@ -62,5 +62,13 @@ return {
     config = function ()
       require('leap').add_default_mappings()
     end
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    dependencies = {"HiPhish/rainbow-delimiters.nvim"},
+    config = function ()
+      require "configs.indent"
+    end
   }
 }
