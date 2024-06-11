@@ -22,7 +22,7 @@ return {
   		ensure_installed = {
   			"lua-language-server", "stylua",
   			"html-lsp", "css-lsp" , "prettier",
-        "clangd", "pyright"
+        "clangd"
   		},
   	},
   },
@@ -41,6 +41,7 @@ return {
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
+    lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function ()
       require "configs.harpoon"
@@ -67,6 +68,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     dependencies = {"HiPhish/rainbow-delimiters.nvim"},
+    lazy = false,
     config = function ()
       require "configs.indent"
     end
@@ -74,8 +76,22 @@ return {
 
   {
     'RaafatTurki/hex.nvim',
+    lazy = false,
     config = function ()
       require('hex').setup()
+    end
+  },
+
+  {
+    'nvim-pack/nvim-spectre',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'BurntSushi/ripgrep',
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function ()
+      require "configs.spectre"
     end
   }
 }
