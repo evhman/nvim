@@ -1,39 +1,31 @@
 return {
   {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
-  },
-
-  -- These are some examples, uncomment them if you want to see them work!
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
-    end,
-  },
-
-  {
   	"williamboman/mason.nvim",
   	opts = {
   		ensure_installed = {
-  			"lua-language-server", "stylua",
-  			"html-lsp", "css-lsp" , "prettier",
-        "clangd", "pyright"
+  			"lua-language-server", "stylua", "prettier", "clangd", "pyright", "esbonio",
   		},
   	},
+  },
+
+  {
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    opts = require "configs.conform",
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "configs.lspconfig"
+    end,
   },
 
   {
   	"nvim-treesitter/nvim-treesitter",
   	opts = {
   		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-        "bash", "c", "cpp",
-        "python", "yaml"
+  			"vim", "lua", "vimdoc", "c", "cpp", "asm", "python"
   		},
   	},
   },
@@ -46,14 +38,6 @@ return {
     config = function ()
       require "configs.harpoon"
     end,
-  },
-
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
-    -- use opts = {} for passing setup options
-    -- this is equalent to setup({}) function
   },
 
   {
@@ -70,6 +54,14 @@ return {
   },
 
   {
+    'RaafatTurki/hex.nvim',
+    lazy = false,
+    config = function ()
+      require('hex').setup()
+    end
+  },
+
+  {
     "lukas-reineke/indent-blankline.nvim",
     dependencies = {"HiPhish/rainbow-delimiters.nvim"},
     lazy = false,
@@ -79,23 +71,12 @@ return {
   },
 
   {
-    'RaafatTurki/hex.nvim',
-    lazy = false,
-    config = function ()
-      require('hex').setup()
-    end
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true,
+    opts = {}
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
   },
 
-  {
-    'nvim-pack/nvim-spectre',
-    lazy = false,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'BurntSushi/ripgrep',
-      'nvim-tree/nvim-web-devicons'
-    },
-    config = function ()
-      require "configs.spectre"
-    end
-  }
 }
