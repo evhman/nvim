@@ -1,31 +1,15 @@
 return {
   {
-  	"williamboman/mason.nvim",
-  	opts = {
-  		ensure_installed = {
-  			"lua-language-server", "stylua", "prettier", "clangd", "pyright", "esbonio",
-  		},
-  	},
-  },
-
-  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "configs.lspconfig"
-    end,
-  },
-
-  {
   	"nvim-treesitter/nvim-treesitter",
   	opts = {
   		ensure_installed = {
-  			"vim", "lua", "vimdoc", "c", "cpp", "asm", "python"
+  			"vim", "lua", "vimdoc", "c", "cpp", "asm", "python", "bash"
   		},
   	},
   },
@@ -74,9 +58,49 @@ return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = true,
-    opts = {}
+    opts = {
+      map_cr = true
+    }
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
   },
 
+  {
+    "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
+    lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+    dependencies = {
+      -- main one
+      { "ms-jpq/coq_nvim", branch = "coq" },
+
+      -- 9000+ Snippets
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
+
+      -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+      -- Need to **configure separately**
+      { 'ms-jpq/coq.thirdparty', branch = "3p" }
+      -- - shell repl
+      -- - nvim lua api
+      -- - scientific calculator
+      -- - comment banner
+      -- - etc
+    },
+    init = function()
+      vim.g.coq_settings = {
+          auto_start = true, -- if you want to start COQ at startup
+          -- Your COQ settings here
+      }
+    end,
+    config = function()
+      require "configs.lspconfig"
+    end,
+  },
+
+  {
+  	"williamboman/mason.nvim",
+  	opts = {
+  		ensure_installed = {
+  			"lua-language-server", "stylua", "prettier", "clangd", "pyright", "esbonio", "bash-language-server", "asm-lsp"
+  		},
+  	},
+  },
 }
