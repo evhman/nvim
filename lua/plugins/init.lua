@@ -6,12 +6,19 @@ return {
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc", "c", "cpp", "asm", "python", "bash"
-  		},
-  	},
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "c",
+        "cpp",
+        "asm",
+        "python",
+        "bash",
+      },
+    },
   },
 
   {
@@ -19,50 +26,37 @@ return {
     branch = "harpoon2",
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function ()
+    config = function()
       require "configs.harpoon"
     end,
   },
 
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
-
-  {
-    'RaafatTurki/hex.nvim',
+    "RaafatTurki/hex.nvim",
     lazy = false,
-    config = function ()
-      require('hex').setup()
-    end
+    config = function()
+      require("hex").setup()
+    end,
   },
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    dependencies = {"HiPhish/rainbow-delimiters.nvim"},
+    dependencies = { "HiPhish/rainbow-delimiters.nvim" },
     lazy = false,
-    config = function ()
+    config = function()
       require "configs.indent"
-    end
+    end,
   },
 
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true,
+    config = function()
+      require "configs.autopairs"
+    end,
     opts = {
-      map_cr = true
-    }
-    -- use opts = {} for passing setup options
-    -- this is equalent to setup({}) function
+      map_cr = true,
+    },
   },
 
   {
@@ -73,11 +67,41 @@ return {
   },
 
   {
-  	"williamboman/mason.nvim",
-  	opts = {
-  		ensure_installed = {
-  			"lua-language-server", "stylua", "prettier", "clangd", "pyright", "esbonio", "bash-language-server", "asm-lsp"
-  		},
-  	},
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+    },
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "clangd",
+        "clang-format",
+        "pyright",
+        "bash-language-server",
+        "asm-lsp",
+      },
+    },
   },
 }
