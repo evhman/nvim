@@ -40,18 +40,19 @@ return {
   },
 
   {
-    "lukas-reineke/indent-blankline.nvim",
-    dependencies = { "HiPhish/rainbow-delimiters.nvim" },
-    lazy = false,
-    config = function()
-      require "configs.indent"
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  {
+    "HampusHauffman/block.nvim",
+    config = function()
+      require("block").setup {
+        automatic = true,
+      }
+    end,
+    lazy = false,
   },
 }
